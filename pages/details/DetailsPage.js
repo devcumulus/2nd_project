@@ -2,19 +2,19 @@ import React from "react";
 import Layout from "../../layouts/Layout";
 import styled from "@emotion/styled";
 
+import Calendar from "./Calendar";
 import MyMap from "./MyMap";
-import DateSelector from "./DateSelector";
 
 const PageWrapper = styled.div`
-  max-width: 1260px;
-  margin: 0 auto;
+  max-width: 1260px; /* Maximum width */
+  margin: 0 auto; /* Center the content horizontally */
 `;
 
 const MainContainer = styled.div`
   gap: 60px;
   margin-top: 65px;
 
-  display: flex;
+  display: flex; // 추가
   font-size: 16px;
 `;
 
@@ -24,7 +24,7 @@ const SubContainer = styled(MainContainer)`
 
 const ProductContent = styled.div`
   margin-left: 10px;
-  margin-right: 620px;
+  margin-right: 750px;
 `;
 
 const MiniContainer = styled.div`
@@ -34,12 +34,13 @@ const MiniContainer = styled.div`
 
 const Box = styled.div`
   height: 550px;
+  flex: 0 0 600px;
   border-bottom: 1px solid #2c39b5;
 `;
 
 const BoxImg = styled.div`
   height: 550px;
-  flex: 0 0 560px;
+  flex: 0 0 600px;
 `;
 
 const Title = styled.div`
@@ -149,7 +150,7 @@ const AddressContainer = styled.div`
 const PurchaseDateText = styled.div`
   margin-top: 28px;
   margin-right: 20px;
-  color: #2d2d2d;
+  color: #2d2d2d; // 제품 구매일 텍스트 색상
   font-family: Inter;
   color: #000;
   font-family: Inter;
@@ -162,10 +163,10 @@ const PurchaseDateText = styled.div`
 const DepositDetailText = styled.div`
   margin-left: 20px;
   margin-top: 28px;
-  color: #2d2d2d;
+  color: #2d2d2d; // 보증금 텍스트 색상
   font-family: Inter;
-  font-size: 18px;
-
+  font-size: 18px; // 보증금 텍스트 크기
+  // 기타 필요한 스타일 속성 추가
   color: #000;
   font-family: Inter;
   font-style: normal;
@@ -181,7 +182,7 @@ const BtnChat = styled.div`
   border: 1px solid #2c39b5;
   color: #2c39b5;
   margin-top: 54px;
-  margin-left: 40px;
+  margin-right: 40px;
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
@@ -206,14 +207,14 @@ const Caution = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 710px;
+  width: 750px;
   height: 112px;
   flex-shrink: 0;
   border-radius: 10px;
   background: #f2f2ff;
   white-space: pre-wrap;
   padding: 10px;
-  margin-right: 30px;
+  margin-right: 110px;
 `;
 
 const Detail = styled.div`
@@ -221,7 +222,7 @@ const Detail = styled.div`
   margin-top: 130px;
   margin-left: 10px;
   width: 730px;
-  white-space: pre-wrap;
+  height: 230px;
   flex-shrink: 0;
   color: #4b4b4b;
   font-family: Inter;
@@ -233,8 +234,8 @@ const Detail = styled.div`
 const CautionContent = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; // 추가
+  align-items: center; // 추가
 `;
 
 const CautionText = styled.div`
@@ -243,9 +244,8 @@ const CautionText = styled.div`
 `;
 
 const CautionImage = styled.img`
-  margin-right: 10px;
-
-  margin-bottom: 5px;
+  margin-right: 20px; // 오른쪽 마진 추가
+  margin-left: 20px;
 `;
 const CautionsImage = styled.img`
   margin-left: 50px;
@@ -256,7 +256,7 @@ const HeaderText = styled.p`
   text-align: center;
   color: #363636;
   font-family: Inter;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
 `;
 
@@ -265,12 +265,11 @@ const BodyText = styled.p`
   color: #777;
   text-align: center;
   font-family: Inter;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 400;
 `;
 
 const RedText = styled.span`
-  margin-left: 40px;
   color: #ff2f2f;
   font-family: Inter;
   font-size: 10px;
@@ -280,7 +279,7 @@ const RedText = styled.span`
 const BlackText = styled.span`
   color: #000;
   font-family: Inter;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 400;
 `;
 
@@ -300,14 +299,13 @@ const PayContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 520px;
-  height: 300px;
+  width: 400px;
+  height: 283px;
   flex-shrink: 0;
   padding-left: 20px;
   padding-right: 13px;
   box-sizing: border-box;
   border: 1px solid #ccc;
-  padding: 25px;
 
   border-radius: 20px;
   background: #fff;
@@ -332,6 +330,20 @@ const PayLabel = styled.span`
   margin-top: 15px;
 `;
 
+const StartDateContainer = styled(PayRow)`
+  width: 367px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #2c39b5;
+  padding-left: 10px;
+
+  margin-bottom: 30px;
+  margin-top: 24px;
+  display: flex;
+
+  justify-content: center;
+`;
+
 const PayValue = styled.span`
   color: #000;
   font-family: Inter;
@@ -343,19 +355,17 @@ const PayValue = styled.span`
 `;
 
 const ReviewFormStyle = styled.div`
-  width: 1260px;
+  width: 1300px;
   height: 380px;
   flex-shrink: 0;
   border-radius: 10px;
   border: 1px solid #2c39b5;
-  padding-left: 20px;
-  padding-top: 15px;
 `;
 
-const ReviewProfile = styled.div`
-  margin-top: 35px;
-  margin-left: 10px;
-  width: 1220px;
+const ReviewStyle = styled.div`
+  margin-top: 50px;
+  margin-left: 20px;
+  width: 1260px;
   height: 100px;
   flex-shrink: 0;
   border-bottom: 1px solid #2c39b5;
@@ -370,8 +380,7 @@ const DetailsPage = () => {
             <ProductImage src="/images/kong.jpg" alt="제품 이미지" />
           </BoxImg>
           <Box>
-            <Title>애플워치 스페이스 닉네임</Title>
-
+            <Title>애플워치 스페이스{}</Title>
             <PriceContainer>
               <Price>7,000 원</Price>
               <RentalText>일일대여가</RentalText>
@@ -404,7 +413,6 @@ const DetailsPage = () => {
         <MainContainer>
           <ProductContent>상품내용</ProductContent> 결제정보
         </MainContainer>
-
         <MiniContainer>
           <Caution>
             <CautionContent>
@@ -427,14 +435,16 @@ const DetailsPage = () => {
               </CautionText>
             </CautionContent>
           </Caution>
-
-          <Detail>
-            내용 입력내용 입력내용 입력내용 입력내용 입력내용 입력내용 입력내용
-          </Detail>
-
+          <Detail>내용 입력 </Detail>
           <PayContainer>
-            <DateSelector />
-
+            <StartDateContainer>
+              <PayLabel>
+                시작일
+                <CautionImage src="/images/Arrow.jpg" alt="시작끝" />
+                마감일
+                <CautionsImage src="/images/calendar.jpg" alt="캘린더" />
+              </PayLabel>
+            </StartDateContainer>
             <PayRow>
               <PayLabel>7,000 x 30일</PayLabel>
               <PayValue>210,000 원</PayValue>
@@ -448,11 +458,13 @@ const DetailsPage = () => {
               <PayValue>260,000 원</PayValue>
             </PayRow>
           </PayContainer>
+
+          <Calendar />
         </MiniContainer>
         <MyMap />
         <ReviewFormStyle>
           후기
-          <ReviewProfile>프로필</ReviewProfile>
+          <ReviewStyle>프로필</ReviewStyle>
         </ReviewFormStyle>
       </PageWrapper>
     </Layout>
