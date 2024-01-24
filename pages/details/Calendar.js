@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { DatePicker } from "antd";
 import { CalendarOutlined } from "@ant-design/icons";
+import koKR from "antd/lib/date-picker/locale/ko_KR";
 
-const DateSelector = () => {
+const calendar = () => {
   const [selectedDateRange, setSelectedDateRange] = useState([]);
   const calendarContainerRef = useRef(null);
 
@@ -46,9 +47,10 @@ const DateSelector = () => {
         suffixIcon={<CalendarOutlined style={{ color: "#2C39B5" }} />}
         popupStyle={calendarPopupStyle}
         getCalendarContainer={() => calendarContainerRef.current}
+        locale={koKR}
       />
     </div>
   );
 };
 
-export default DateSelector;
+export default calendar;

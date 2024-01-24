@@ -1,137 +1,121 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../layouts/Layout";
-import styled from "@emotion/styled";
+import {
+  ConfirmBt,
+  JoinAgreement,
+  JoinFirstPageStyle,
+  JoinHeader,
+  JoinMain,
+  RadioBox,
+} from "../../styles/join/JoinFirstPageStyle";
+import { useNavigate } from "react-router-dom";
 
 const JoinFirstPage = () => {
-  const JoinFirstPageStyle = styled.div`
-    width: 1300px;
-    text-align: center;
-    margin: 0 auto;
-    /* background: skyblue; */
-  `;
-  const JoinHeader = styled.div`
-    margin-top: 70px;
-    p {
-      color: #000;
-      font-family: Inter;
-      font-size: 23px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
+  const navigate = useNavigate();
+  const [agreement, setAgreement] = useState({
+    agree: false,
+    disagree: false,
+  });
 
-      margin-bottom: 60px;
-    }
-    img {
-      width: 550px;
-      height: 63px;
-      margin-bottom: 70px;
-    }
-  `;
-  const JoinMain = styled.div`
-    width: 980px;
-    text-align: center;
-    margin: 0 auto;
-  `;
-  const Agreement = styled.div`
-    width: 980px;
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid #2c39b5;
-    margin: 0 auto;
-    h1 {
-      color: #777;
-      font-family: Inter;
-      font-size: 22px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
+  const [personalInfo, setPersonalInfo] = useState({
+    agree: false,
+    disagree: false,
+  });
 
-      text-align: start;
+  // RadioBox 옵션 변경을 처리하는 함수
+  const handleRadioChange = (boxName, option) => {
+    if (boxName === "agreement") {
+      setAgreement(prevState => ({
+        ...prevState,
+        [option]: !prevState[option],
+      }));
+    } else if (boxName === "personalInfo") {
+      setPersonalInfo(prevState => ({
+        ...prevState,
+        [option]: !prevState[option],
+      }));
     }
-    h2 {
-      color: #777;
-      font-family: Inter;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
+  };
 
-      text-align: start;
+  // "확인" 버튼 클릭을 처리하는 함수
+  const handleConfirmClick = () => {
+    // 두 RadioBox에서 모두 "동의함"이 선택되었는지 확인
+    if (agreement.agree && personalInfo.agree) {
+      // 페이지를 이동하거나 필요한 작업을 수행합니다.
+      navigate(`/join/2`);
+    } else {
+      alert("두 옵션에 모두 동의해야 진행할 수 있습니다.");
     }
-  `;
-  const PersonalInfo = styled.div`
-    width: 980px;
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid #2c39b5;
-    margin: 0 auto;
-    h1 {
-      color: #777;
-      font-family: Inter;
-      font-size: 22px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
+  };
 
-      text-align: start;
-    }
-    h2 {
-      color: #777;
-      font-family: Inter;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-
-      text-align: start;
-    }
-  `;
-  const RadioBox = styled.div`
-    text-align: start;
-    padding: 15px 0;
-
-    color: #777;
-    font-family: Inter;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    input[type="radio"] {
-      width: 17px;
-      height: 17px;
-      margin-right: 10px;
-    }
-    input[type="radio"] + label {
-      margin-right: 25px;
-    }
-    input[type="radio"]:checked + label {
-      color: #000;
-    }
-  `;
-  const ConfirmBt = styled.button`
-    width: 200px;
-    height: 50px;
-    border-radius: 10px;
-    background: #2c39b5;
-    margin: 100px auto;
-    border: none;
-
-    color: #fff;
-    font-family: Inter;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  `;
+  const RadioBox = ({ name, options, onRadioChange }) => {
+    const radioBoxStyle = {
+      textAlign: 'start',
+      padding: '15px 0',
+      color: '#777',
+      fontSize: '22px',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      lineHeight: 'normal',
+    };
+  
+    const radioInputStyle = {
+      width: '17px',
+      height: '17px',
+      marginRight: '10px',
+    };
+  
+    const radioLabelStyle = {
+      marginRight: '25px',
+    };
+  
+    const checkedLabelStyle = {
+      color: '#000',
+    };
+  
+    return (
+      <div style={radioBoxStyle}>
+        <input
+          type="radio"
+          id={`${name}-agree`}
+          name={`${name}-radio`}
+          checked={options.agree}
+          onChange={() => onRadioChange(name, 'agree')}
+          style={radioInputStyle}
+        />
+        <label
+          htmlFor={`${name}-agree`}
+          style={options.agree ? { ...radioLabelStyle, ...checkedLabelStyle } : radioLabelStyle}
+        >
+          동의함
+        </label>
+        <input
+          type="radio"
+          id={`${name}-disagree`}
+          name={`${name}-radio`}
+          checked={options.disagree}
+          onChange={() => onRadioChange(name, 'disagree')}
+          style={radioInputStyle}
+        />
+        <label
+          htmlFor={`${name}-disagree`}
+          style={options.disagree ? { ...radioLabelStyle, ...checkedLabelStyle } : radioLabelStyle}
+        >
+          동의안함
+        </label>
+      </div>
+    );
+  };
+  
   return (
     <Layout>
       <JoinFirstPageStyle>
         <JoinHeader>
           <p>회원가입</p>
-          <img src="../images/join_step1.svg" />
+          <img src="/images/join_step1.svg" />
         </JoinHeader>
         <JoinMain>
-          <Agreement>
+          <JoinAgreement>
             <h1>대여서비스 이용약관</h1>
             <br />
             <h2>
@@ -186,18 +170,22 @@ const JoinFirstPage = () => {
               2. 이용자는 물품을 대여함에 있어 보험 가입 여부를 신중하게
               결정하여야 합니다.
             </h2>
-          </Agreement>
-          <RadioBox>
-            <input type="radio" id="agreement-agree" name="agreement-radio" />
+          </JoinAgreement>
+          <RadioBox
+            name="agreement"
+            options={agreement}
+            onRadioChange={handleRadioChange}
+          >
+            {/* <input type="radio" id="agreement-agree" name="agreement-radio" />
             <label htmlFor="agreement-agree">동의함</label>
             <input
               type="radio"
               id="agreement-disagree"
               name="agreement-radio"
             />
-            <label htmlFor="agreement-disagree">동의안함</label>
+            <label htmlFor="agreement-disagree">동의안함</label> */}
           </RadioBox>
-          <PersonalInfo>
+          <JoinAgreement>
             <h1>개인정보처리방침</h1>
             <br />
             <h2>
@@ -246,9 +234,13 @@ const JoinFirstPage = () => {
               다만, 아래의 경우에는 예외로 합니다.
               <br />- 이용자 동의가 있는 경우
             </h2>
-          </PersonalInfo>
-          <RadioBox>
-            <input
+          </JoinAgreement>
+          <RadioBox
+            name="personalInfo"
+            options={personalInfo}
+            onRadioChange={handleRadioChange}
+          >
+            {/* <input
               type="radio"
               id="personalInfo-agree"
               name="personalInfo-radio"
@@ -259,13 +251,14 @@ const JoinFirstPage = () => {
               id="personalInfo-disagree"
               name="personalInfo-radio"
             />
-            <label htmlFor="personalInfo-disagree">동의안함</label>
+            <label htmlFor="personalInfo-disagree">동의안함</label> */}
           </RadioBox>
         </JoinMain>
-        <ConfirmBt>확인</ConfirmBt>
+        <ConfirmBt onClick={handleConfirmClick}>확인</ConfirmBt>
       </JoinFirstPageStyle>
     </Layout>
   );
 };
+
 
 export default JoinFirstPage;

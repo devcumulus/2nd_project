@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Breadcrumb from "./components/breadcrumb/Breadcrumb";
 import Loading from "./components/loading/Loading";
-import MyMap from "./pages/details/MyMap";
 // import "antd/dist/antd.css";
 
 const LazyJoinFirstPage = lazy(() => import("./pages/join/JoinFirstPage"));
@@ -16,11 +15,11 @@ const LazyAddEditPage = lazy(() => import("./pages/addedit/AddEditPage"));
 
 const LazyMainPage = lazy(() => import("./pages/main/MainPage"));
 
-const LazyMainMorePage = lazy(() => import("./pages/main/MainMore"));
-
-const LazyDetailsPage = lazy(() => import("./pages/details/DetailsPage"));
+const LazyMainMorePage = lazy(() => import("./pages/main/MainMorePage"));
 
 const LazyPayPage = lazy(() => import("./pages/pay/PayPage"));
+
+const LazyDetailsPage = lazy(() => import("./pages/details/DetailsPage"));
 
 const Lazyprod = lazy(() => import("./pages/prod/Products"));
 
@@ -54,14 +53,7 @@ const App = () => {
             </Suspense>
           }
         ></Route>
-        <Route
-          path="/join/"
-          element={
-            <Suspense fallback={<Loading />}>
-              <LazyJoinPage />
-            </Suspense>
-          }
-        ></Route>
+
         <Route
           path="/join/1"
           element={
@@ -127,7 +119,6 @@ const App = () => {
           }
         ></Route>
       </Routes>
-      ㅎ{" "}
     </BrowserRouter>
   );
 };
